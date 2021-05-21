@@ -22,7 +22,7 @@ export default async function login(req, res) {
 
     setAuthCookie(res, auth.secret);
 
-    res.status(200).end();
+    res.status(200).json({token: auth.secret});
   } catch (error) {
     console.error(error);
     res.status(error.requestResult.statusCode).send(error.message);
