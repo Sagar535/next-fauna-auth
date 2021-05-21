@@ -1,8 +1,17 @@
 import { query as q } from 'faunadb';
 import { guestClient } from '../../utils/fauna-client';
 import { setAuthCookie } from '../../utils/auth-cookies';
+import NextCors from 'nextjs-cors';
 
 export default async function login(req, res) {
+
+  await NextCors(req, res, {
+      // Options
+      methods: ['GET', 'HEAD', 'PUT', 'PATCH', 'POST', 'DELETE'],
+      origin: '*',
+      optionsSuccessStatus: 200, // some legacy browsers (IE11, various SmartTVs) choke on 204
+   });
+  
   const { email, password } = req.body;
 
   if (!email || !password) {
